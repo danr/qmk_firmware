@@ -6,7 +6,7 @@
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
-#define QWER 3 // media keys
+#define QWER 3 // qwerty keys, for other to test
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -35,10 +35,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
         KC_GRV,        KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_CAPS,
-        ALT_T(KC_TAB), KC_QUOT, KC_COMM,KC_DOT, KC_P,   KC_Y,   TG(MDIA),
+        ALT_T(KC_TAB), KC_QUOT, KC_COMM,KC_DOT, KC_P,   KC_Y,   TG(QWER),
         CTL_T(KC_ESC), KC_A,    KC_O,   KC_E,   KC_U,   KC_I,
-        KC_LSFT,       KC_SCLN, KC_Q,   KC_J,   KC_K,   KC_X,   TG(QWER),
-        KC_LCTL,       KC_COLN, KC_BSLS,KC_LBRC, LT(SYMB,KC_RBRC),
+        KC_LSFT,       KC_SCLN, KC_Q,   KC_J,   KC_K,   KC_X,   TG(SYMB),
+LT(SYMB,KC_LBRC),      KC_BSLS, KC_LEFT,KC_RGHT, KC_LGUI,
                                                       KC_LGUI, KC_LALT,
                                                                KC_HOME,
                                                KC_BSPC,KC_DELT,KC_END,
@@ -46,8 +46,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_BTLD,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_SLSH,
              TG(SYMB),    KC_F,   KC_G,   KC_C,   KC_R,   KC_L,   KC_EQL,
                           KC_D,   KC_H,   KC_T,   KC_N,   KC_S,   KC_MINS,
-             KC_BTN3,     KC_B,   KC_M,   KC_W,   KC_V,   KC_Z,   KC_RSFT,
-                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,KC_RCTL,
+             TG(MDIA),    KC_B,   KC_M,   KC_W,   KC_V,   KC_Z,   KC_RSFT,
+                                 MO(SYMB),KC_DOWN,KC_UP,  KC_COLN,CTL_T(KC_RBRC),
              KC_APP,  KC_RALT,
              KC_PGUP,
              KC_PGDN, KC_ENT, KC_SPC
@@ -74,6 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
+
 // SYMBOLS
 [SYMB] = KEYMAP(
        // left hand
@@ -164,7 +165,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const uint16_t PROGMEM fn_actions[] = {
     [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
 };
-
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
@@ -197,14 +197,13 @@ void * matrix_scan_user(void) {
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
         case 1:
-            ergodox_right_led_3_on();
+            // ergodox_right_led_3_on();
             break;
         case 2:
             ergodox_right_led_2_on();
             break;
         case 3:
-            ergodox_right_led_1_on();
-            ergodox_right_led_2_on();
+            ergodox_right_led_3_on();
             break;
         default:
             // none
@@ -213,9 +212,6 @@ void * matrix_scan_user(void) {
 
     if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) {
       ergodox_right_led_1_on();
-      if (layer == 3) {
-        ergodox_right_led_3_on();
-      }
     }
     return NULL;
 
