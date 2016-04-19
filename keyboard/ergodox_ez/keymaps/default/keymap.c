@@ -37,9 +37,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,        KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_CAPS,
         ALT_T(KC_TAB), KC_QUOT, KC_COMM,KC_DOT, KC_P,   KC_Y,   TG(QWER),
         CTL_T(KC_ESC), KC_A,    KC_O,   KC_E,   KC_U,   KC_I,
-        KC_LSFT,       KC_SCLN, KC_Q,   KC_J,   KC_K,   KC_X,   TG(SYMB),
+        KC_LSFT,       KC_SCLN, KC_Q,   KC_J,   KC_K,   KC_X,   TG(MDIA),
 LT(SYMB,KC_LBRC),      KC_BSLS, KC_LEFT,KC_RGHT, KC_LGUI,
-                                                      KC_LGUI, KC_LALT,
+                                                     MO(MDIA), KC_LALT,
                                                                KC_HOME,
                                                KC_BSPC,KC_DELT,KC_END,
         // right hand
@@ -47,7 +47,7 @@ LT(SYMB,KC_LBRC),      KC_BSLS, KC_LEFT,KC_RGHT, KC_LGUI,
              TG(SYMB),    KC_F,   KC_G,   KC_C,   KC_R,   KC_L,   KC_EQL,
                           KC_D,   KC_H,   KC_T,   KC_N,   KC_S,   KC_MINS,
              TG(MDIA),    KC_B,   KC_M,   KC_W,   KC_V,   KC_Z,   KC_RSFT,
-                                 MO(SYMB),KC_DOWN,KC_UP,  KC_COLN,CTL_T(KC_RBRC),
+                                 MO(SYMB),KC_DOWN,KC_UP,  KC_BSLS,CTL_T(KC_RBRC),
              KC_APP,  KC_RALT,
              KC_PGUP,
              KC_PGDN, KC_ENT, KC_SPC
@@ -118,24 +118,25 @@ LT(SYMB,KC_LBRC),      KC_BSLS, KC_LEFT,KC_RGHT, KC_LGUI,
  *                                 `--------------------'       `--------------------'
  */
 // MEDIA AND MOUSE
+//
 [MDIA] = KEYMAP(
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                            KC_TRNS, KC_TRNS,
                                                     KC_TRNS,
                                   KC_TRNS, KC_TRNS, KC_TRNS,
     // right hand
        KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MPLY,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_MPRV, KC_MNXT, KC_TRNS, KC_TRNS,
-                          KC_VOLU, KC_VOLD, KC_MUTE, KC_TRNS, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_BTN1, KC_BTN3, KC_BTN2, KC_TRNS, KC_TRNS,
+                 KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, KC_TRNS,
+                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,
-       KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_WBAK
+       KC_WH_U,
+       KC_WH_D, KC_BTN2, KC_BTN1
 ),
 
 [QWER] = KEYMAP(
