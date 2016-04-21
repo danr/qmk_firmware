@@ -5,8 +5,9 @@
 
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
-#define MDIA 2 // media keys
-#define QWER 3 // qwerty keys, for other to test
+#define QWER 2 // qwerty keys, for other to test and when a dvorak layout is on
+
+#define UNUSED KC_TRNS
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -34,21 +35,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_GRV,        KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_CAPS,
-        ALT_T(KC_TAB), KC_QUOT, KC_COMM,KC_DOT, KC_P,   KC_Y,   TG(QWER),
-        CTL_T(KC_ESC), KC_A,    KC_O,   KC_E,   KC_U,   KC_I,
-        KC_LSFT,       KC_SCLN, KC_Q,   KC_J,   KC_K,   KC_X,   TG(MDIA),
-LT(SYMB,KC_LBRC),      KC_BSLS, KC_LEFT,KC_RGHT, KC_LGUI,
-                                                     MO(MDIA), KC_LALT,
+        KC_GRV,          KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_CAPS,
+        LT(SYMB,KC_TAB), KC_QUOT, KC_COMM,KC_DOT, KC_P,   KC_Y,   TG(QWER),
+        CTL_T(KC_ESC),   KC_A,    KC_O,   KC_E,   KC_U,   KC_I,
+        KC_LSFT,         KC_SCLN, KC_Q,   KC_J,   KC_K,   KC_X,   TG(SYMB),
+        KC_BSLS,         KC_LBRC, KC_RBRC,KC_PIPE, KC_LGUI,
+                                                     KC_LALT, UNUSED,
                                                                KC_HOME,
                                                KC_BSPC,KC_DELT,KC_END,
         // right hand
-             KC_BTLD,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   KC_SLSH,
-             TG(SYMB),    KC_F,   KC_G,   KC_C,   KC_R,   KC_L,   KC_EQL,
-                          KC_D,   KC_H,   KC_T,   KC_N,   KC_S,   KC_MINS,
-             TG(MDIA),    KC_B,   KC_M,   KC_W,   KC_V,   KC_Z,   KC_RSFT,
-                                 MO(SYMB),KC_DOWN,KC_UP,  KC_BSLS,CTL_T(KC_RBRC),
-             KC_APP,  KC_RALT,
+             KC_CAPS,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   UNUSED,
+             TG(QWER),    KC_F,   KC_G,   KC_C,   KC_R,   KC_L,   LT(SYMB,KC_SLSH),
+                          KC_D,   KC_H,   KC_T,   KC_N,   KC_S,   CTL_T(KC_MINS),
+             TG(SYMB),    KC_B,   KC_M,   KC_W,   KC_V,   KC_Z,   KC_RSFT,
+                                  KC_LGUI,KC_EQL, UNUSED, UNUSED, UNUSED,
+             KC_APP /* for åäö */, KC_RALT,
              KC_PGUP,
              KC_PGDN, KC_ENT, KC_SPC
     ),
@@ -88,55 +89,13 @@ LT(SYMB,KC_LBRC),      KC_BSLS, KC_LEFT,KC_RGHT, KC_LGUI,
                                KC_TRNS,KC_TRNS,KC_TRNS,
        // right hand
        KC_TRNS, KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
-       KC_TRNS, KC_UP,   KC_7,   KC_8,    KC_9,    KC_ASTR, KC_F12,
-                KC_DOWN, KC_4,   KC_5,    KC_6,    KC_PLUS, KC_TRNS,
-       KC_TRNS, KC_AMPR, KC_1,   KC_2,    KC_3,    KC_BSLS, KC_TRNS,
-                         KC_TRNS,KC_DOT,  KC_0,    KC_EQL,  KC_TRNS,
+       KC_TRNS, KC_AMPR, KC_BSLS,KC_SLSH, KC_EQL,  KC_MINS, KC_TRNS,
+                KC_WH_U, KC_LEFT,KC_DOWN, KC_UP,   KC_RIGHT,KC_TRNS,
+       KC_TRNS, KC_WH_D, KC_MS_L,KC_MS_D, KC_MS_U, KC_MS_R, KC_TRNS,
+                         KC_TRNS,KC_BTN1, KC_BTN2, KC_BTN3, KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
-),
-/* Keymap 2: Media and mouse keys
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      |      |      |      |      |  Play  |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      | Prev | Next |      |        |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      | Lclk | Rclk |                                       |VolUp |VolDn | Mute |      |      |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
- *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |Brwser|
- *                                 |      |      |------|       |------|      |Back  |
- *                                 |      |      |      |       |      |      |      |
- *                                 `--------------------'       `--------------------'
- */
-// MEDIA AND MOUSE
-//
-[MDIA] = KEYMAP(
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                           KC_TRNS, KC_TRNS,
-                                                    KC_TRNS,
-                                  KC_TRNS, KC_TRNS, KC_TRNS,
-    // right hand
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, KC_BTN1, KC_BTN3, KC_BTN2, KC_TRNS, KC_TRNS,
-                 KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_TRNS,
-       KC_TRNS,  KC_TRNS, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, KC_TRNS,
-                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS,
-       KC_WH_U,
-       KC_WH_D, KC_BTN2, KC_BTN1
 ),
 
 [QWER] = KEYMAP(
@@ -160,6 +119,7 @@ LT(SYMB,KC_LBRC),      KC_BSLS, KC_LEFT,KC_RGHT, KC_LGUI,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
     )
+
 
 };
 
@@ -198,12 +158,11 @@ void * matrix_scan_user(void) {
     switch (layer) {
       // TODO: Make this relevant to the ErgoDox EZ.
         case 1:
-            // ergodox_right_led_3_on();
-            break;
-        case 2:
+            // SYMB
             ergodox_right_led_2_on();
             break;
-        case 3:
+        case 2:
+            // QWER
             ergodox_right_led_3_on();
             break;
         default:
@@ -211,6 +170,7 @@ void * matrix_scan_user(void) {
             break;
     }
 
+    // CAPS
     if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) {
       ergodox_right_led_1_on();
     }
