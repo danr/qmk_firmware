@@ -31,25 +31,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |ace   | End  |       | PgDn |        |      |
  *                                 `--------------------'       `----------------------'
  */
+
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_GRV,          KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_CAPS,
-        LT(SYMB,KC_TAB), KC_QUOT, KC_COMM,KC_DOT, KC_P,   KC_Y,   TG(QWER),
+        UNUSED,          KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_CAPS,
+        ALT_T(KC_TAB),   KC_QUOT, KC_COMM,KC_DOT, KC_P,   KC_Y,   KC_GRV, // TG(QWER),
         CTL_T(KC_ESC),   KC_A,    KC_O,   KC_E,   KC_U,   KC_I,
-        KC_LSFT,         KC_SCLN, KC_Q,   KC_J,   KC_K,   KC_X,   TG(SYMB),
-        KC_BSLS,         KC_LBRC, KC_RBRC,KC_PIPE, KC_LGUI,
-                                                     KC_LALT, UNUSED,
+        KC_LSFT,         KC_SCLN, KC_Q,   KC_J,   KC_K,   KC_X,   KC_LALT, // TG(SYMB),
+        KC_LCTL,         KC_LBRC, KC_RBRC,KC_BSLS, KC_LGUI,
+                                                      UNUSED, UNUSED,
                                                                KC_HOME,
                                                KC_BSPC,KC_DELT,KC_END,
         // right hand
-             KC_CAPS,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   UNUSED,
-             TG(QWER),    KC_F,   KC_G,   KC_C,   KC_R,   KC_L,   LT(SYMB,KC_SLSH),
-                          KC_D,   KC_H,   KC_T,   KC_N,   KC_S,   CTL_T(KC_MINS),
-             TG(SYMB),    KC_B,   KC_M,   KC_W,   KC_V,   KC_Z,   KC_RSFT,
-                                  KC_LGUI,KC_EQL, UNUSED, UNUSED, UNUSED,
-             KC_APP /* for åäö */, KC_RALT,
+             TG(QWER),    KC_6,   KC_7,   KC_8,   KC_9,   KC_0,   UNUSED,
+             KC_EQL,      KC_F,   KC_G,   KC_C,   KC_R,   KC_L,   KC_SLSH,
+                          KC_D,   KC_H,   KC_T,   KC_N,   KC_S,   KC_MINS,
+             KC_RALT,      KC_B,   KC_M,   KC_W,   KC_V,   KC_Z,   KC_RSFT,
+                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RIGHT,KC_RCTL,
+             UNUSED /* for åäö */, KC_APP,
              KC_PGUP,
              KC_PGDN, KC_ENT, KC_SPC
     ),
